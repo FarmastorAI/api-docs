@@ -2,10 +2,10 @@ let currentSwaggerUI = null;
 
 // Инициализация с первым сервисом
 document.addEventListener('DOMContentLoaded', function() {
-    loadSwagger('services/api_vchasno.yaml');
+    loadSwagger('services/api_vchasno.yaml', document.querySelector('.service-btn.active'));
 });
 
-function loadSwagger(specUrl) {
+function loadSwagger(specUrl, btn) {
     // Удаляем предыдущий экземпляр
     if (currentSwaggerUI) {
         const swaggerContainer = document.getElementById('swagger-ui');
@@ -27,7 +27,6 @@ function loadSwagger(specUrl) {
         layout: "StandaloneLayout",
         tryItOutEnabled: true,
         requestInterceptor: (request) => {
-            // Добавляем базовые заголовки для всех запросов
             request.headers['Authorization'] = 'Bearer YOUR_TOKEN_HERE';
             return request;
         },
@@ -38,10 +37,8 @@ function loadSwagger(specUrl) {
     });
     
     // Обновляем активную кнопку
-    document.querySelectorAll('.service-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
+    document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
 }
 
 // Функция для добавления нового сервиса динамически
@@ -50,6 +47,6 @@ function addNewService(name, specUrl, icon = '🔧') {
     const newButton = document.createElement('button');
     newButton.className = 'service-btn';
     newButton.innerHTML = `${icon} ${name}`;
-    newButton.onclick = () => loadSwagger(specUrl);
+    newButton.onclick = function() { loadSwagger(specUrl, newButton); };
     buttonsContainer.appendChild(newButton);
 }

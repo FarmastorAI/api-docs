@@ -30,10 +30,6 @@
         .service-btn:hover { background: #0056b3; }
         .service-btn.active { background: #28a745; }
     </style>
-    <!-- Подключаем необходимые JS библиотеки -->
-    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
-    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js"></script>
-    <script src="swagger-config.js"></script>
 </head>
 <body>
     <div class="service-selector">
@@ -53,5 +49,9 @@
     </div>
     
     <div id="swagger-ui"></div>
+    <!-- ВАЖНО: подключаем JS именно в таком порядке -->
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js"></script>
+    <script src="swagger-config.js"></script>
 </body>
 </html>

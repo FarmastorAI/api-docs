@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>API Documentation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation Portal</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css" />
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <style>
+        .topbar { display: none; }
+        .service-selector {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .service-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .service-btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .service-btn:hover { background: #0056b3; }
+        .service-btn.active { background: #28a745; }
+    </style>
 </head>
 <body>
-    <h1>API Documentation Portal</h1>
-    <p>Coming soon...</p>
+    <div class="service-selector">
+        <h2>🏢 Company API Documentation</h2>
+        <p>Виберіть сервіс для перегляду документації:</p>
+        <div class="service-buttons">
+            <button class="service-btn active" onclick="loadSwagger('services/api_vchasno.yaml')">
+                👤 Сервіс з API Вчасно
+            </button>
+            <button class="service-btn" onclick="loadSwagger('services/order-service.yaml')">
+                🛒 Order Service
+            </button>
+            <button class="service-btn" onclick="loadSwagger('services/payment-service.yaml')">
+                💳 Payment Service
+            </button>
+            <button class="service-btn" onclick="loadSwagger('services/notification-service.yaml')">
+                🔔 Notification Service
+            </button>
+        </div>
+    </div>
+    
+    <div id="swagger-ui"></div>
+
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
+    <script src="swagger-config.js"></script>
 </body>
 </html>

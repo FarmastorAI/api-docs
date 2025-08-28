@@ -2,7 +2,7 @@ let currentSwaggerUI = null;
 
 // Инициализация с первым сервисом
 document.addEventListener('DOMContentLoaded', function() {
-    loadSwagger('services/user-service.yaml');
+    loadSwagger('services/api_vchasno.yaml');
 });
 
 function loadSwagger(specUrl) {

@@ -30,6 +30,10 @@
         .service-btn:hover { background: #0056b3; }
         .service-btn.active { background: #28a745; }
     </style>
+    <!-- Подключаем необходимые JS библиотеки -->
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js"></script>
+    <script src="swagger-config.js"></script>
 </head>
 <body>
     <div class="service-selector">
@@ -37,20 +41,17 @@
         <p>Виберіть сервіс для перегляду документації:</p>
         <div class="service-buttons">
             <button class="service-btn active" onclick="loadSwagger('services/api_vchasno.yaml', this)">
-             👤 Сервіс з API Вчасно
+                👤 Сервіс з API Вчасно
             </button>
             <button class="service-btn" onclick="loadSwagger('services/api_suppliers.yaml', this)">
-            👤 Сервіс синхронізації документи з API постачальників
+                👤 Сервіс синхронізації документи з API постачальників
             </button>
             <button class="service-btn" onclick="loadSwagger('services/api_add_crm.yaml', this)">
-           👤 Сервіс по работі з TT --> OneBox 
-           </button>
+                👤 Сервіс по работі з TT --> OneBox 
+            </button>
         </div>
     </div>
     
     <div id="swagger-ui"></div>
-
-    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
-    <script src="swagger-config.js"></script>
 </body>
 </html>

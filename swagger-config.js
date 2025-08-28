@@ -2,16 +2,16 @@ let currentSwaggerUI = null;
 
 // Инициализация с первым сервисом
 document.addEventListener('DOMContentLoaded', function() {
-    loadSwagger('services/api_vchasno.yaml', document.querySelector('.service-btn.active'));
+    // Найти первую активную кнопку
+    const firstBtn = document.querySelector('.service-btn.active');
+    loadSwagger('services/api_vchasno.yaml', firstBtn);
 });
 
 function loadSwagger(specUrl, btn) {
-    // Удаляем предыдущий экземпляр
-    if (currentSwaggerUI) {
-        const swaggerContainer = document.getElementById('swagger-ui');
-        swaggerContainer.innerHTML = '';
-    }
-    
+    // Очищаем предыдущий экземпляр Swagger UI
+    const swaggerContainer = document.getElementById('swagger-ui');
+    swaggerContainer.innerHTML = '';
+
     // Создаем новый экземпляр Swagger UI
     currentSwaggerUI = SwaggerUIBundle({
         url: specUrl,
@@ -19,7 +19,7 @@ function loadSwagger(specUrl, btn) {
         deepLinking: true,
         presets: [
             SwaggerUIBundle.presets.apis,
-            SwaggerUIBundle.presets.standalone
+            SwaggerUIStandalonePreset
         ],
         plugins: [
             SwaggerUIBundle.plugins.DownloadUrl
@@ -27,6 +27,7 @@ function loadSwagger(specUrl, btn) {
         layout: "StandaloneLayout",
         tryItOutEnabled: true,
         requestInterceptor: (request) => {
+            // Добавляем базовые заголовки для всех запросов
             request.headers['Authorization'] = 'Bearer YOUR_TOKEN_HERE';
             return request;
         },
@@ -35,7 +36,7 @@ function loadSwagger(specUrl, btn) {
             return response;
         }
     });
-    
+
     // Обновляем активную кнопку
     document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
     if (btn) btn.classList.add('active');

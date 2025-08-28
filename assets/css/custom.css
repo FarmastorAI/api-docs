@@ -1,0 +1,45 @@
+/* Корпоративные цвета и стили */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --info-color: #17a2b8;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+}
+
+.swagger-ui .topbar {
+  background-color: var(--primary-color);
+}
+
+.swagger-ui .info .title {
+  color: var(--primary-color);
+}
+
+/* Кастомные стили для методов HTTP */
+.swagger-ui .opblock.opblock-get .opblock-summary {
+  border-color: var(--success-color);
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary {
+  border-color: var(--info-color);
+}
+
+.swagger-ui .opblock.opblock-put .opblock-summary {
+  border-color: var(--warning-color);
+}
+
+.swagger-ui .opblock.opblock-delete .opblock-summary {
+  border-color: var(--danger-color);
+}
+
+/* Адаптивный дизайн */
+@media (max-width: 768px) {
+  .service-buttons {
+    flex-direction: column;
+  }
+  
+  .service-btn {
+    width: 100%;
+  }
+}

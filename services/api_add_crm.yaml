@@ -1,0 +1,1902 @@
+openapi: 3.0.1
+info:
+  title: Add API
+  description: 'Описание API Accept-Encoding: gzip, br'
+  version: v1
+paths:
+  /api/addRequest:
+    post:
+      tags:
+        - Bill
+      summary: 'Чек, создание на ТТ'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBillParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getRestGoodsByBranch:
+    get:
+      tags:
+        - Bill
+      summary: Получения остатка по Товар-ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRestGoodsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/delBillByBranch:
+    delete:
+      tags:
+        - Bill
+      summary: Удаление чека на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelBillParam'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getBillStatus:
+    get:
+      tags:
+        - Bill
+      summary: Получения стутус чеков
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBillStatusParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/editRequest:
+    post:
+      tags:
+        - Bill
+      summary: 'Чек, редактирование на ТТ'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillEditParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getInfoBillByID:
+    get:
+      tags:
+        - Bill
+      summary: Получения информации по Чек-ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInfoBillByIDParams'
+      responses:
+        '200':
+          description: "<remarks>\r\n             Sample response:\r\n             {\r\n              \"status\": true,\r\n                \"data\": [\r\n            {\r\n            \"billGoodsID\": 128349,\r\n            \"billID\": 94235,\r\n            \"doPartyID\": 2802,\r\n            \"goodsID\": 415943,\r\n            \"goodsQty\": 3,\r\n            \"goodsPrice\": 4\r\n            }\r\n            ],\r\n            \"message\": \"\"\r\n            }\r\n            </remarks>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillInfoResult'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/createDiscountCards:
+    post:
+      tags:
+        - Bill
+      summary: Создание дисконтной карты
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"data\": {\r\n \"cardNO\": \"+380505555555\",\r\n \"cardStatus\": 0,\r\n \"cardMessage\": \"Карта существует:+380505555555\"\r\n},\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDiscountCardsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/createPromoCoupons:
+    post:
+      tags:
+        - Bill
+      summary: Создания промо-купонов
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"data\": {\r\n \"cardStatus\": 0,\r\n \"cardMessage\": \"Добавляемый номер уже существует\"\r\n},\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePromoCouponsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/createDiscountPrograms:
+    post:
+      tags:
+        - Bill
+      summary: Создание дисконтной программы
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"data\": {\r\n \"programID\": \"42415452\"\r\n},\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDiscProgramsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/bonusesRecalcByCard:
+    post:
+      tags:
+        - Bill
+      summary: Пересчет доступных бонусов по карте
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BonusesRecalcByCardParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/bonusesCreate:
+    post:
+      tags:
+        - Bill
+      summary: Начисление/списание бонусов по карте
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BonusesCreateParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/pingByBranchID:
+    get:
+      tags:
+        - Bill
+      summary: Проверка наличия связи на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PingByBranchIDParam'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getBranchsARC:
+    get:
+      tags:
+        - Bill
+      summary: Получения стутус чеков
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBranchsARCParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/docsARCMove:
+    post:
+      tags:
+        - Bill
+      summary: Перемещение документа на АРЦ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DocsARCMoveParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/addPKO:
+    post:
+      tags:
+        - Bill
+      summary: Создание ПКО\РКО на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePKOParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/addReportZ:
+    post:
+      tags:
+        - Bill
+      summary: Создание Z-отчета на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReportZParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getRestGoodsByFilials:
+    post:
+      tags:
+        - Bill
+      summary: Получения остатка по Товар-ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRestGoodsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/delBillByOneBoxID:
+    delete:
+      tags:
+        - Bill
+      summary: Удаление чека на ТТ по OneBoxID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DelBillByOneBoxIDParam'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getInfoBillByDocID:
+    post:
+      tags:
+        - Bill
+      summary: Получения информации по Чек-ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInfoBillByIDParams'
+      responses:
+        '200':
+          description: "<remarks>\r\n             Sample response:\r\n             {\r\n              \"status\": true,\r\n                \"data\": [\r\n            {\r\n            \"billGoodsID\": 128349,\r\n            \"billID\": 94235,\r\n            \"doPartyID\": 2802,\r\n            \"goodsID\": 415943,\r\n            \"goodsQty\": 3,\r\n            \"goodsPrice\": 4\r\n            }\r\n            ],\r\n            \"message\": \"\"\r\n            }\r\n            </remarks>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillInfoResult'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/1edf17abc3c94161800d2608623a5712:
+    get:
+      tags:
+        - Bill
+      summary: getHostName
+      responses:
+        '200':
+          description: "<remarks>\r\n             Sample response:\r\n            </remarks>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillInfoResult'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getClientInfo:
+    get:
+      tags:
+        - Bill
+      summary: Получения информации по карте
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetClientInfoParams'
+      responses:
+        '200':
+          description: "<remarks>\r\n             Sample response:\r\n             {\r\n            \"status\": true,\r\n            \"data\": [\r\n              {\r\n                \"cardID\": 94454214,\r\n                \"cardNO\": \"1100002470284\",\r\n                \"cardEmbossNO\": \"4 13 435244\",\r\n                 \"customerName\": \"Мулярчук Оксана Владимировна\",\r\n                 \"birthday\": \"12/27/1982 00:00:00\",\r\n                 \"sex\": \"Жіноча\",\r\n                 \"shablonID\": 371625,\r\n                 \"shablonName\": \"Співробітник\"\r\n               }\r\n             ],\r\n             \"message\": \"\"\r\n            }\r\n            </remarks>"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillInfoResult'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/addReturnRequest:
+    post:
+      tags:
+        - Bill
+      summary: Формирования возвратных чеков OB
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddReturnRequestParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/getListFilials:
+    get:
+      tags:
+        - Bill
+      summary: Получения список ТТ
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillInfoResult'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/setGlobalParams:
+    post:
+      tags:
+        - Bill
+      summary: Изменения глобальных параметров на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetGlobalParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/updateDiscountCards:
+    post:
+      tags:
+        - Bill
+      summary: Обновления информации по дисконтной карте
+      description: " Sample response:\r\n {\r\n\"status\": true,\r\n\"data\": {\r\n \"cardNO\": \"+380505555555\",\r\n \"cardStatus\": 0,\r\n \"cardMessage\": \"Карта существует:+380505555555\"\r\n},\r\n\"message\": \"\"\r\n}"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdDiscountCardsParams'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+  /api/setPromoGroupProgram:
+    post:
+      tags:
+        - Bill
+      summary: Изменения глобальных параметров на ТТ
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/setPromoGroupProgram'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+        '400':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddCrmResponse'
+components:
+  schemas:
+    AddCrmResponse:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: Признак успешного выполнения операции
+        data:
+          description: >-
+            В случае, если метод возвращает данные - контейнер с результирующим
+            набором данных. В случае отсутствия значения - параметр не
+            передается.
+          nullable: true
+        message:
+          type: string
+          description: >-
+            Текст детализации выполнения операции. В случае отсутствия значения
+            - параметр не передается
+          nullable: true
+      additionalProperties: false
+    AddReturnRequestParams:
+      required:
+        - apiKey
+        - branchID
+        - docParentID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        docParentID:
+          type: integer
+          description: 'Id родительского документа, Идентификатор.'
+          format: int32
+          example: 132546
+        billOfLading:
+          type: string
+          description: Номер ТТН
+          nullable: true
+      additionalProperties: false
+    BillDeliveryParams:
+      type: object
+      properties:
+        customerName:
+          type: string
+          description: ФИО клиента
+          nullable: true
+        customerPhoneNo:
+          type: string
+          description: Номер телефона клиента
+          nullable: true
+        customerAddress:
+          type: string
+          description: Адрес клиента
+          nullable: true
+        stateCheckID:
+          type: integer
+          description: " Статус сборки\r\n156779 -\tПередано курьеру\r\n470597\t- Собран частично\r\n155787\t- Ожидание товара\r\n470595\t- Готов к сборке\r\n470596\t- Собран"
+          format: int32
+          nullable: true
+        orderExtNo:
+          type: string
+          description: Номер заказа (внешний)
+          nullable: true
+        orderIntNo:
+          type: string
+          description: Номер заказа
+          nullable: true
+        payTypeId:
+          type: integer
+          description: " Тип оплаты e-com:\r\n155793 - LiqPay\r\n155792 - Наличными при получении\r\n155794 - Наложенный платеж\r\n155817 - Безналичная оплата\r\n157112 - Готівка(off-line)\r\n157111 - Банківська карта(off-line)\r\n157116 - LiqPay(off-line)"
+          format: int32
+          nullable: true
+        payTransactionId:
+          type: string
+          description: ID Транзакции
+          nullable: true
+        payTransactionAmount:
+          type: number
+          description: Сумма транзакции
+          format: double
+          nullable: true
+        payStatusId:
+          type: integer
+          description: "Статус оплаты e-com:\r\n155810 - Оплачено\r\n156565\t- В резерве (HOLD)\r\n155811\t- Неоплачено"
+          format: int32
+          nullable: true
+        sourceId:
+          type: integer
+          description: " Источник заказа e-com:\r\n155807 - Doko.com.ua\r\n155805 - Ручной заказ КЦ\r\n155804 - Tabletki.ua\r\n155820 - Helsi\r\n155806 - Geoapteka.ua\r\n155803 - Страховые компании\r\n155801 - Сайт 1sa.com.ua\r\n155819 - Zdorovi\r\n155808 - Doc.ua\r\n155800 - Сайт add.ua\r\n155802 - Мобильное приложение Add.ua\r\n155818 - Моя Аптека\r\n155822 - Likie.dp.ua"
+          format: int32
+          nullable: true
+        deliveryTypeId:
+          type: integer
+          description: " Тип доставки e-com\r\n155797 - Укрпочта\r\n155796 - Курьер\r\n155795 - Самовывоз\r\n155799 - Justin\r\n155798 - Новая почта"
+          format: int32
+          nullable: true
+        comment:
+          type: string
+          nullable: true
+        courierVerifCode:
+          type: string
+          description: Проверочный код доставки
+          nullable: true
+      additionalProperties: false
+    BillEditDeliveryParams:
+      type: object
+      properties:
+        payTypeId:
+          type: integer
+          description: " Тип оплаты e-com:\r\n155793 - LiqPay\r\n155792 - Наличными при получении\r\n155794 - Наложенный платеж\r\n155817 - Безналичная оплата\r\n157112 - Готівка(off-line)\r\n157111 - Банківська карта(off-line)\r\n157116 - LiqPay(off-line)"
+          format: int32
+          nullable: true
+        payStatusId:
+          type: integer
+          description: "Статус оплаты e-com:\r\n155810 - Оплачено\r\n156565\t- В резерве (HOLD)\r\n155811\t- Неоплачено"
+          format: int32
+          nullable: true
+      additionalProperties: false
+    BillEditParams:
+      required:
+        - apiKey
+        - billID
+        - branchID
+        - oneBoxID
+        - payTypeID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        billID:
+          type: integer
+          description: 'ID документа, Идентификатор.'
+          format: int32
+          example: 123456
+        oneBoxID:
+          type: string
+          description: 'ID Onebox, Идентификатор.'
+          example: '123456'
+        payTypeID:
+          type: integer
+          format: int32
+        deliveryParams:
+          $ref: '#/components/schemas/BillEditDeliveryParams'
+      additionalProperties: false
+    BillGoodsParams:
+      required:
+        - goodsID
+        - goodsQty
+      type: object
+      properties:
+        goodsID:
+          type: integer
+          description: 'Товар, Идентификатор'
+          format: int32
+        goodsQty:
+          type: number
+          description: 'Товар, количество (может быть дробным)'
+          format: double
+        goodsPriceR:
+          type: number
+          description: Розн. цена с НДС
+          format: double
+          nullable: true
+        goodsPriceO:
+          type: number
+          description: Отп. цена с НДС
+          format: double
+          nullable: true
+        docPartyID:
+          type: integer
+          description: Идентификатор партии
+          format: int32
+        vendorGoodsID:
+          type: string
+          description: 'Товар, Идентификатор (поставщик)'
+          nullable: true
+        vendorGoodsName:
+          type: string
+          description: Товар название (поставщик)
+          nullable: true
+        programID:
+          type: integer
+          description: 'Идентификатор программы, по которой начислены бонусы'
+          format: int32
+          nullable: true
+        bonusesWriteOff:
+          type: number
+          description: Сумма построчного списание бонусов
+          format: double
+          nullable: true
+        bonusesAdd:
+          type: number
+          description: Сумма построчного начисление
+          format: double
+          nullable: true
+      additionalProperties: false
+    BillInfoResult:
+      type: object
+      properties:
+        billGoodsID:
+          type: integer
+          format: int32
+        billID:
+          type: integer
+          format: int32
+        doPartyID:
+          type: integer
+          format: int32
+        goodsID:
+          type: integer
+          format: int32
+        goodsQty:
+          type: number
+          format: double
+          nullable: true
+        goodsPrice:
+          type: number
+          format: double
+          nullable: true
+        vendorGoodsID:
+          type: string
+          nullable: true
+      additionalProperties: false
+      description: Массив объектов с информацией о заказе
+    BillKind:
+      enum:
+        - 120514
+        - 120516
+        - 156574
+      type: integer
+      description: " Вид чека\r\nStandard = 120514,\r\nDelivery = 120516,\r\nRecipe = 156574"
+      format: int32
+    BillStatusParamsEmpty:
+      required:
+        - billID
+        - branchID
+      type: object
+      properties:
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+        billID:
+          type: integer
+          description: 'Чек, Идентификатор.'
+          format: int32
+      additionalProperties: false
+    BillTitlesExtParams:
+      type: object
+      properties:
+        externalDocumentNo:
+          type: string
+          nullable: true
+        customerFirstName:
+          type: string
+          description: 'Клиент, имя'
+          nullable: true
+        customerMiddleName:
+          type: string
+          description: 'Клиент, отчество'
+          nullable: true
+        customerLastName:
+          type: string
+          description: 'Клиент, фамилия'
+          nullable: true
+        insuranceCompanyName:
+          type: string
+          description: Старховая компания
+          nullable: true
+        customerInsuranceCardNo:
+          type: string
+          description: 'Клиент, номер полиса'
+          nullable: true
+        customerFranchisingPctg:
+          type: number
+          description: Процент франшизы
+          format: double
+          nullable: true
+        doctorFullName:
+          type: string
+          description: 'Врач, ФИО'
+          nullable: true
+        recipeNum:
+          type: string
+          description: Номер рецепта
+          nullable: true
+        comment:
+          type: string
+          nullable: true
+      additionalProperties: false
+    BillType:
+      enum:
+        - 120503
+        - 120505
+      type: integer
+      description: Тип чека
+      format: int32
+    BonusesCreateParams:
+      required:
+        - apiKey
+        - bonusCreateParams
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        bonusCreateParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/BonusesDocCreateParams'
+          description: Массив обьектов с информацией о начисление/списание бонусов по карте
+      additionalProperties: false
+    BonusesDocCreateParams:
+      required:
+        - amount
+        - bonus
+        - bonusTypeID
+        - docContID
+        - docDate
+        - docID
+        - docNO
+        - docTypeID
+        - filialID
+        - goodsID
+        - numCard
+        - offLineFlag
+        - priceO
+        - priceR
+        - programID
+        - sourceID
+        - status
+        - validDate
+      type: object
+      properties:
+        filialID:
+          type: integer
+          description: ID TT
+          format: int32
+        numCard:
+          type: string
+          description: Номер карты
+          example: '+380509999999'
+        programID:
+          type: integer
+          description: "ID программы в ЦО тотус \r\nдля списания в чеке: -1, \r\nдля списания в возвратном чеке: -2, \r\nсписание для чеков фишки: -3"
+          format: int32
+        docID:
+          type: integer
+          description: ID документа
+          format: int32
+        docDate:
+          type: string
+          description: Дата докуметна
+          format: date-time
+        docContID:
+          type: integer
+          description: Строка документа
+          format: int32
+        bonus:
+          type: number
+          description: Сумма спсанных/начисленных бонусов(списанные с "-")
+          format: double
+        goodsID:
+          type: integer
+          description: ID товара
+          format: int32
+        amount:
+          type: number
+          description: Кол-во товара в документе
+          format: double
+        docTypeID:
+          type: integer
+          description: "ID типа документа\r\nчек - 120433\r\nвозвратный чек - 120434"
+          format: int32
+        priceR:
+          type: number
+          description: Цена розничная с НДС
+          format: double
+        priceO:
+          type: number
+          description: Цена отпускная с НДС
+          format: double
+        docNO:
+          type: string
+          description: Номер документа
+        status:
+          type: integer
+          description: "Статус начисления/списания\r\n резерв - 0\r\n подтвержденный - 1 \r\n отмененный - 2"
+          format: int32
+        bonusTypeID:
+          type: integer
+          description: "Тип операци по бонусам начисления/списания\r\n начисления - 120573\r\n списание - 120574"
+          format: int32
+        validDate:
+          type: string
+          description: Дата до которой действуют бонусы
+          format: date-time
+        offLineFlag:
+          type: integer
+          description: "Признак offline операции\r\nonline - 0\r\noffline - 1"
+          format: int32
+        sourceID:
+          type: integer
+          description: "Источник\r\nOneBox - 156868"
+          format: int32
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    BonusesRecalcByCardParams:
+      required:
+        - apiKey
+        - byCard
+        - numCard
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        byCard:
+          type: integer
+          description: Пересчет бонусов по карте
+          format: int32
+        numCard:
+          type: string
+          description: Номер карты
+          example: '+380509999999'
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    CreateBillParams:
+      required:
+        - apiKey
+        - branchID
+        - docContentsParams
+        - kind
+        - type
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        kind:
+          $ref: '#/components/schemas/BillKind'
+        type:
+          $ref: '#/components/schemas/BillType'
+        cardNo:
+          type: string
+          description: Номер карты
+          nullable: true
+        cardNoFrom:
+          type: string
+          description: Номер карты Эмбосс
+          nullable: true
+        cardNoTo:
+          type: string
+          description: Карта клиента
+          nullable: true
+        manualPrice:
+          type: integer
+          description: Признак "Цены не редактируются". Запрет изменения цены в чеке.
+          format: int32
+          nullable: true
+        comment:
+          type: string
+          description: Комментарий
+          nullable: true
+        noInt:
+          type: string
+          description: Номер чека вчасно
+          nullable: true
+        initiatorID:
+          type: integer
+          description: владелец чека ID
+          format: int32
+          nullable: true
+        ekaID:
+          type: integer
+          description: КА ID
+          format: int32
+          nullable: true
+        statusReserve:
+          type: integer
+          description: Статус отложенного резерва Morion
+          format: int32
+          nullable: true
+        typeCreateID:
+          type: integer
+          description: "Тип Создания документа ID\r\n120451 - \tиз файла\r\n120452 - \tручной\r\n147898 -\tВЕБ Доставка\r\n120997 -\tИз другой системы (обмен)\r\n120676 -\tСистемный\r\n120542 -\tИз другой системы(перевод)\r\n120856 -\tИз заказа\r\n147923 -\tиз места кассира\r\n148582 -\tЦентрализованный\r\n148678 -  TT\r\n148689 -\tАвто Перемещение ТТ (комиссия)\r\n156868 -\tИз OneBox"
+          format: int32
+          nullable: true
+        channelID:
+          type: integer
+          description: "Канал продаж ID\r\n156782 -\tGeoApteka\r\n156784\t-\tHelsi (заказ лекарств)\r\n155821\t-\tLikiE\r\n156918\t-\tLiki.ua\r\n156783\t-\tLiki24\r\n727184\t-\tTabletki.ua\r\n781046\t-\tZdorovi.ua\r\n121052\t-\tАптеки\r\n121053\t-\tБезнальные продажи\r\n121054\t-\tВрачи\r\n148486\t-\tИнсулины\r\n147912\t-\tИнтернет\r\n148487\t-\tЛьготные продажи\r\n709611\t-\tОпт\r\n148250\t-\tПроизводитель\r\n148312\t-\tРеимбурсация\r\n156930\t-\tСпівробітники\r\n147913\t-\tСтраховые\r\n156913\t-\tЧат-Бот"
+          format: int32
+          nullable: true
+        payTypeId:
+          type: integer
+          description: "Тип оплаты документа:\r\n120453 - Готівка\r\n120453 - Картка\r\n120453 - Безготівка"
+          format: int32
+          nullable: true
+        deliveryParams:
+          $ref: '#/components/schemas/BillDeliveryParams'
+        docTitlesExtParams:
+          $ref: '#/components/schemas/BillTitlesExtParams'
+        docContentsParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillGoodsParams'
+          description: Массив обьектов с информацией о товарах заказа
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+        oneboxID:
+          type: string
+          description: oneboxID = ID ТТ+ ID заказа
+          nullable: true
+        sumBonusesWriteOff:
+          type: number
+          description: Сумма бонусов к списанию
+          format: double
+          nullable: true
+        coupon:
+          type: string
+          description: Купон выдачи/промо-код
+          nullable: true
+      additionalProperties: false
+    CreateDiscountCardsParams:
+      required:
+        - apiKey
+        - birthDate
+        - cstamp
+        - docID
+        - filialID
+        - firstName
+        - genderID
+        - lastName
+        - phoneNO
+        - source
+        - updFlag
+        - ustamp
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        phoneNO:
+          type: string
+          description: Номер телефона
+          example: '+380509999999'
+        firstName:
+          type: string
+          description: Имя клиента
+        lastName:
+          type: string
+          description: Фамилия клиента
+        genderID:
+          type: integer
+          description: " Пол клиента\r\n120576 - Мужской\r\n120577 - Женский"
+          format: int32
+        birthDate:
+          type: string
+          description: День рождения клиента
+          format: date-time
+        source:
+          type: integer
+          description: "Источник\r\n729788\tЧеки доставки (Информация о клиенте)\r\n727726\tTotus.Front\r\n727727\tКорп. университет (чат-бот)\r\n727728\tСайт (при регистрации)\r\n727729\tМоб. приложение АДД.УА\r\n727730\tРучное создание (КЦ)\r\n727731\tРучное создание (пакетное из файла)\r\n727732\tАвтоматическое создание. Таблетки.УА (tabletki.ua)\r\n775964\tСоздано в Ruan\r\n776545 СРМ"
+          format: int32
+        filialID:
+          type: integer
+          description: ТТ ID
+          format: int32
+        ustamp:
+          type: string
+          description: Создатель
+        cstamp:
+          type: string
+          description: Дата создания
+          format: date-time
+        docID:
+          type: integer
+          description: ID первого чека при оформлении карты
+          format: int32
+        updFlag:
+          type: integer
+          description: "Признак при оформлении карты\r\n0\tСоздание карты\r\n 1\tИзменение карты"
+          format: int32
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    CreateDiscProgramsParams:
+      required:
+        - apiKey
+        - programName
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        id:
+          type: integer
+          description: ID дисконтной программы
+          format: int32
+        programName:
+          type: string
+          description: Название дисконтной программы
+        dateFrom:
+          type: string
+          description: Дата начала действия программы
+          format: date-time
+          nullable: true
+        dateTo:
+          type: string
+          description: Дата окончания действия программы
+          format: date-time
+          nullable: true
+        typeID:
+          type: integer
+          description: "Тип программы ID\r\n120527\tДисконтно-бонусная\r\n120528\tПромо(количественно-качественная)\r\n148349\tНочные цены"
+          format: int32
+          nullable: true
+        cardsFlag:
+          type: integer
+          description: Признак "Карточная"
+          format: int32
+          nullable: true
+        kindID:
+          type: integer
+          description: "Вид программы ID\r\n120583\tПодарочная\r\n120530\tСтандарт\r\n120531\tюл\r\n120532\tПостоянная покупка"
+          format: int32
+          nullable: true
+        channelID:
+          type: integer
+          description: "Канал ID\r\n147912\tИнтернет\r\n147913\tСтраховые\r\n147914\tЮр.лица (ТТ)\r\n147915\tТендеры (прозорро)\r\n147916\tЭкспорт\r\n147992\tне определен \r\n148312\tРеимбурсация\r\n121052\tАптеки\r\n121053\tБезнальные продажи\r\n121054\tВрачи\r\n148250\tПроизводитель\r\n148487\tЛьготные продажи\r\n148486\tИнсулины\r\n709611\tОпт\r\n727184\tTabletki.ua\r\n155821\tLikie.dp.ua"
+          format: int32
+          nullable: true
+        typeDiscount:
+          type: integer
+          description: Вид скидки ID
+          format: int32
+          nullable: true
+        isCompensat:
+          type: integer
+          description: Признак "Программа участвует в компенсации"
+          format: int32
+          nullable: true
+        programGroupID:
+          type: integer
+          description: ID группы промо-программ
+          format: int32
+          nullable: true
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    CreatePKOParams:
+      required:
+        - apiKey
+        - branchID
+        - typeID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        typeID:
+          type: integer
+          description: 'Тип ордера (1-приход, 2-расход)'
+          format: int32
+        summa:
+          type: number
+          description: Сумма
+          format: double
+          nullable: true
+        avtSumma:
+          type: number
+          description: Сумма НДС
+          format: double
+          nullable: true
+        accountID:
+          type: integer
+          description: "Счет ID \r\nДля ПКО: Разменная монета - 462055 , Реализация – сумма чеков -462057\r\nДля РКО: Разменная монета - 462067), Инкассация"
+          format: int32
+          nullable: true
+        externalID:
+          type: integer
+          description: >-
+            Выдано/получено ID (КА или банк в зависимости от типа ордера) – ID
+            ОФФлайн-кассы
+          format: int32
+          nullable: true
+        mainBuh:
+          type: integer
+          description: Гл.бух. ID
+          format: int32
+          nullable: true
+        cashier:
+          type: integer
+          description: Кассир ID – ИД сотрудника ТТ
+          format: int32
+          nullable: true
+        amountZ:
+          type: number
+          description: Сумма из Z-отчета
+          format: double
+          nullable: true
+        avtZ:
+          type: number
+          description: Ндс из Z-отчета
+          format: double
+          nullable: true
+        mainCashier:
+          type: integer
+          description: >-
+            Выдано/получено ID (КА или банк в зависимости от типа ордера) – ID
+            ОФФлайн-кассы
+          format: int32
+          nullable: true
+        balanceKA:
+          type: number
+          description: >-
+            Сумма денег в денежном ящике (остаток денег после:
+            вносы+продажи-выносы)
+          format: double
+          nullable: true
+        comment:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreatePromoCouponsParams:
+      required:
+        - apiKey
+        - cardsNumber
+        - isDisabled
+        - numCards
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        cardsNumber:
+          type: string
+          description: Номер основной карты
+          example: '+380509999999'
+        numCards:
+          type: string
+          description: Номер брелка
+        isDisabled:
+          type: integer
+          description: Признак активации/деактивации брелка
+          format: int32
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    CreateReportZParams:
+      required:
+        - apiKey
+        - branchID
+        - typeID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        typeID:
+          type: integer
+          description: "Тип отчета \r\n120627 -\tX отчет\r\n120628 - Z отчет"
+          format: int32
+        qty:
+          type: number
+          description: Кол-во пробитых чеков
+          format: double
+          nullable: true
+        suma:
+          type: number
+          description: Оборот по ставке А
+          format: double
+          nullable: true
+        sumb:
+          type: number
+          description: Оборот по ставке Б
+          format: double
+          nullable: true
+        sumv:
+          type: number
+          description: Оборот по ставке В
+          format: double
+          nullable: true
+        sumg:
+          type: number
+          description: Оборот по ставке Г
+          format: double
+          nullable: true
+        sumd:
+          type: number
+          description: Оборот по ставке Д
+          format: double
+          nullable: true
+        sume:
+          type: number
+          description: Оборот по ставке Е
+          format: double
+          nullable: true
+        sumkartochka:
+          type: number
+          description: Сумма продаж банковской картой
+          format: double
+          nullable: true
+        sumkredit:
+          type: number
+          description: Сумма кредитом (не используется)
+          format: double
+          nullable: true
+        sumchek:
+          type: number
+          description: Сумма безналом (компенсация)
+          format: double
+          nullable: true
+        sumnall:
+          type: number
+          description: Сумма наличными
+          format: double
+          nullable: true
+        sumnacenka:
+          type: number
+          description: Сумма наценки
+          format: double
+          nullable: true
+        sumskidki:
+          type: number
+          description: Сумма скидки
+          format: double
+          nullable: true
+        sumavans:
+          type: number
+          description: Сумма авансом
+          format: double
+          nullable: true
+        retqty:
+          type: number
+          description: Кол-во пробитых возвратных чеков
+          format: double
+          nullable: true
+        sumreta:
+          type: number
+          description: Возвраты по ставке А
+          format: double
+          nullable: true
+        sumretb:
+          type: number
+          description: Возвраты по ставке Б
+          format: double
+          nullable: true
+        sumretv:
+          type: number
+          description: Возвраты по ставке В
+          format: double
+          nullable: true
+        sumretg:
+          type: number
+          description: Возвраты по ставке Г
+          format: double
+          nullable: true
+        sumretd:
+          type: number
+          description: Возвраты по ставке Д
+          format: double
+          nullable: true
+        sumrete:
+          type: number
+          description: Возвраты по ставке Е
+          format: double
+          nullable: true
+        sumretkartochka:
+          type: number
+          description: Сумма возврата банковской картой
+          format: double
+          nullable: true
+        sumretkredit:
+          type: number
+          description: Сумма возврата кредитом (не используется)
+          format: double
+          nullable: true
+        sumretchek:
+          type: number
+          description: Сумма возврата безналом (компенсация)
+          format: double
+          nullable: true
+        sumretnall:
+          type: number
+          description: Сумма возврата наличными
+          format: double
+          nullable: true
+        sumretnacenka:
+          type: number
+          description: Сумма наценки возврата
+          format: double
+          nullable: true
+        sumretskidki:
+          type: number
+          description: Сумма скидки возврата
+          format: double
+          nullable: true
+        sumretavans:
+          type: number
+          description: Сумма авансом возврата
+          format: double
+          nullable: true
+        comments:
+          type: string
+          description: COMMENTS
+          nullable: true
+        serialnumber:
+          type: string
+          description: Номер кассового (IKC-E810T №MS80003048 05-12-14)
+          nullable: true
+        taxa:
+          type: integer
+          description: НДС А
+          format: int32
+          nullable: true
+        taxb:
+          type: integer
+          description: НДС Б
+          format: int32
+          nullable: true
+        taxv:
+          type: integer
+          description: НДС В
+          format: int32
+          nullable: true
+        taxg:
+          type: integer
+          description: НДС Г
+          format: int32
+          nullable: true
+        taxd:
+          type: integer
+          description: НДС Д
+          format: int32
+          nullable: true
+        taxe:
+          type: integer
+          description: НДС Е
+          format: int32
+          nullable: true
+        sumcashstart:
+          type: number
+          description: В сейфе
+          format: double
+          nullable: true
+        sumcashincome:
+          type: number
+          description: Внесение
+          format: double
+          nullable: true
+        sumcashoutcome:
+          type: number
+          description: Выдача
+          format: double
+          nullable: true
+        sumcashrest:
+          type: number
+          description: Остаток
+          format: double
+          nullable: true
+        reporT_DATE:
+          type: string
+          description: 'Дата отчета DD.MM.YYYY HH24:MI:SS'
+          format: date-time
+          nullable: true
+        cashdevicE_ID:
+          type: integer
+          description: Ид кассовго в справочнике
+          format: int32
+          nullable: true
+        iS_AUTO:
+          type: integer
+          description: IS_AUTO
+          format: int32
+          nullable: true
+      additionalProperties: false
+    DelBillByOneBoxIDParam:
+      required:
+        - apiKey
+        - branchID
+        - oneBoxID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+        oneBoxID:
+          type: string
+          description: 'OneBoxID, Идентификатор.'
+      additionalProperties: false
+    DelBillParam:
+      required:
+        - apiKey
+        - billID
+        - branchID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+        billID:
+          type: integer
+          description: 'Чек, Идентификатор.'
+          format: int32
+      additionalProperties: false
+    docContentsParams:
+      required:
+        - docPartyID
+        - goodsID
+      type: object
+      properties:
+        docPartyID:
+          type: integer
+          description: Идентификатор партии
+          format: int32
+        goodsID:
+          type: integer
+          description: 'Товар, Идентификатор'
+          format: int32
+        amount:
+          type: number
+          description: 'Товар, количество (может быть дробным)'
+          format: double
+          nullable: true
+      additionalProperties: false
+    DocsARCMoveParams:
+      required:
+        - apiKey
+        - branchID
+        - docContents
+        - firmID
+        - orderNum
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        firmID:
+          type: integer
+          description: 'Контрагент, Идентификатор.'
+          format: int32
+        orderNum:
+          type: string
+          description: Номер документа
+        docContents:
+          type: array
+          items:
+            $ref: '#/components/schemas/docContentsParams'
+          description: Массив объектов с информацией о товарах в документе
+      additionalProperties: false
+    GetBillStatusParams:
+      required:
+        - apiKey
+        - billStatusParams
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        billStatusParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/BillStatusParamsEmpty'
+          description: Массив обьектов с информацией статусе чека по ТТ/Чек
+      additionalProperties: false
+    GetBranchsARCParams:
+      required:
+        - apiKey
+        - idsBranch
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        idsBranch:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Массив обьектов с информацией ARC по ТТ
+      additionalProperties: false
+    GetClientInfoParams:
+      required:
+        - apiKey
+        - cardNO
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        cardNO:
+          type: string
+          description: Номер картки або номер телефону
+      additionalProperties: false
+    GetInfoBillByIDParams:
+      required:
+        - apiKey
+        - billID
+        - branchID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+        billID:
+          type: integer
+          description: 'Чек, Идентификатор.'
+          format: int32
+      additionalProperties: false
+    GetRestGoodsParams:
+      required:
+        - apiKey
+        - restGoodsParams
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        restGoodsParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestGoodsParamsEmpty'
+          description: Массив обьектов с информацией о ТТ/товарах для получения остатков
+      additionalProperties: false
+    GlobalParam:
+      type: object
+      properties:
+        columnName:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    PingByBranchIDParam:
+      required:
+        - apiKey
+        - branchID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+      additionalProperties: false
+    RestGoodsParamsEmpty:
+      required:
+        - branchID
+        - goodsID
+      type: object
+      properties:
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+        goodsID:
+          type: integer
+          description: 'Товар, Идентификатор'
+          format: int32
+      additionalProperties: false
+    SetGlobalParams:
+      required:
+        - apiKey
+        - branchID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        branchID:
+          type: integer
+          description: 'Торговая точка, Идентификатор.'
+          format: int32
+          example: 677477
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/GlobalParam'
+          description: Обьект с информацией о доставке
+          nullable: true
+      additionalProperties: false
+    setPromoGroupProgram:
+      required:
+        - apiKey
+        - nameGroup
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        nameGroup:
+          type: string
+          description: Название группы промо
+      additionalProperties: false
+    UpdDiscountCardsParams:
+      required:
+        - apiKey
+        - cardID
+      type: object
+      properties:
+        apiKey:
+          type: string
+          description: Ключ авторизации для выполнения операции
+        cardID:
+          type: integer
+          description: ID карты
+          format: int32
+        numCard:
+          type: string
+          description: Номер карты
+          nullable: true
+          example: '+380509999999'
+        firstName:
+          type: string
+          description: Имя клиента
+          nullable: true
+        lastName:
+          type: string
+          description: Фамилия клиента
+          nullable: true
+        middleName:
+          type: string
+          description: Фамилия клиента
+          nullable: true
+        genderID:
+          type: integer
+          description: " Пол клиента\r\n120576 - Мужской\r\n120577 - Женский"
+          format: int32
+          nullable: true
+        birthDate:
+          type: string
+          description: День рождения клиента
+          format: date-time
+          nullable: true
+        timeout:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false

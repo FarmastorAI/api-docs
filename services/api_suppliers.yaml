@@ -1,0 +1,282 @@
+openapi: 3.0.4
+info:
+  title: 'Сервіс синхронізації прайсів, замовлень від постачальників'
+  description: Отримує документи з API постачальників та зберігає в Oracle.
+  version: v1
+paths:
+  /api/suppliers/uf/prices/sync:
+    get:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Синхронізувати прайс-лист Юрія‑Фарм \r\nМетод: GET /priceget."
+      parameters:
+        - name: clientCodeEdrpou
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/uf/orders:
+    post:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Створення первинної потреби-замовлення \r\nМетод: POST /demandpost."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UFDemandRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UFDemandRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UFDemandRequest'
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/uf/orders/confirm:
+    put:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Підтвердження потреби – оформити замовлення \r\nМетод: PUT /demandput."
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UFDemandConfirmationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UFDemandConfirmationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UFDemandConfirmationRequest'
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/uf/orders/processed:
+    get:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Отримати перелік оброблених первинних потреб \r\nМетод: GET / processeddemandget."
+      responses:
+        '200':
+          description: OK
+  '/api/suppliers/uf/orders/{demandId}/status':
+    get:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Отримати статус замовлення за ідентифікатором DemandID \r\nМетод: GET /demandstatusget."
+      parameters:
+        - name: demandId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  '/api/suppliers/uf/orders/{clientOrderId}/mmo':
+    get:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Отримати електронну накладну (MMO) за номером клієнтського замовлення.\r\nМетод: GET /mmoget"
+      parameters:
+        - name: clientOrderId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: clientCodeEdrpou
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/uf/claims:
+    post:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Створити претензію чи повернення.\r\nМетод: POST /orderclaimpost"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UFOrderClaimRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UFOrderClaimRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UFOrderClaimRequest'
+      responses:
+        '200':
+          description: OK
+  '/api/suppliers/uf/claims/{orderClaimId}/status':
+    get:
+      tags:
+        - API Юрія-Фарм (UF)
+      summary: "Отримати статус претензії чи повернення.\r\nМетод: GET /orderclaimstatusget"
+      parameters:
+        - name: orderClaimId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: clientCodeEdrpou
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/delta-medical/prices/sync:
+    post:
+      tags:
+        - DeltaMedical
+      summary: Синхронизировать прайс‑лист Delta Medical.
+      parameters:
+        - name: date
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    UFDemandConfirmationRequest:
+      type: object
+      properties:
+        messageID:
+          type: string
+          nullable: true
+        sourceID:
+          type: string
+          nullable: true
+        demandID:
+          type: string
+          nullable: true
+        demandNumber:
+          type: string
+          nullable: true
+        clientOrderID:
+          type: string
+          nullable: true
+        clientCodeEDRPOU:
+          type: string
+          nullable: true
+      additionalProperties: false
+      description: >-
+        Запрос на подтверждение первичной потребности – перевод черновика в
+        заказ.
+    UFDemandItem:
+      type: object
+      properties:
+        itemID:
+          type: string
+          nullable: true
+        quantity:
+          type: number
+          format: double
+      additionalProperties: false
+      description: Позиция первичной потребности (заказа). Описывает товар и количество.
+    UFDemandRequest:
+      type: object
+      properties:
+        messageID:
+          type: string
+          nullable: true
+        sourceID:
+          type: string
+          nullable: true
+        clientOrderID:
+          type: string
+          nullable: true
+        clientCodeEDRPOU:
+          type: string
+          nullable: true
+        consigneeCode:
+          type: string
+          nullable: true
+        supplierCodeEDRPOU:
+          type: string
+          nullable: true
+        demandDate:
+          type: string
+          nullable: true
+        deliveryDate:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UFDemandItem'
+          nullable: true
+      additionalProperties: false
+      description: Запрос создания первичной потребности (черновика заказа).
+    UFOrderClaimItem:
+      type: object
+      properties:
+        itemID:
+          type: string
+          nullable: true
+        quantityOnInvoice:
+          type: number
+          format: double
+        quantityAccepted:
+          type: number
+          format: double
+        claimQuantity:
+          type: number
+          format: double
+        comments:
+          type: string
+          nullable: true
+        expirationDate:
+          type: string
+          nullable: true
+        price:
+          type: number
+          format: double
+        fileData:
+          type: string
+          nullable: true
+        fileName:
+          type: string
+          nullable: true
+      additionalProperties: false
+      description: Позиция претензии/возврата по заказу.
+    UFOrderClaimRequest:
+      type: object
+      properties:
+        messageID:
+          type: string
+          nullable: true
+        sourceID:
+          type: string
+          nullable: true
+        clientOrderID:
+          type: string
+          nullable: true
+        clientCodeEDRPOU:
+          type: string
+          nullable: true
+        clientOrderClaimID:
+          type: string
+          nullable: true
+        invoiceNumber:
+          type: string
+          nullable: true
+        orderClaimType:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/UFOrderClaimItem'
+          nullable: true
+      additionalProperties: false
+      description: Запрос на создание претензии/возврата.

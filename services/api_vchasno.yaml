@@ -1,0 +1,342 @@
+openapi: 3.0.4
+info:
+  title: 'Сервіс синхронізації прайсів, замовлень'
+  description: Отримує документи з API Вчасно та зберігає в Oracle.
+  version: v1
+paths:
+  /api/Order/get-company:
+    get:
+      tags:
+        - Довідники
+      summary: Отримання інформації по компанії з сервісу Вчасно.
+      description: Повертає id компанії з сервісу Вчасно
+      parameters:
+        - name: edrpou
+          in: query
+          description: edrpou
+          schema:
+            type: string
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ID компанії отримано
+        '500':
+          description: Помилка на сервері
+  /api/Order/get-glns-by-company:
+    get:
+      tags:
+        - Довідники
+      summary: Отримання інформації по списку GLNs для компанії з сервісу Вчасно.
+      description: Повертає GLNs по id компанії з сервісу Вчасно
+      parameters:
+        - name: company_id
+          in: query
+          description: Company ID
+          schema:
+            type: string
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: GLNs отримано
+        '500':
+          description: Помилка на сервері
+  /api/Order/sync-orders:
+    get:
+      tags:
+        - Замовлення
+      summary: Отримання замовлень з сервісу Вчасно.
+      description: 'Повертає всі документи-замовлення, створені після зазначеної дати.'
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: dateFrom
+          in: query
+          description: Дата початку пошуку документів
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Тип документів
+          schema:
+            type: integer
+            format: int32
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Документи синхронізовано
+        '500':
+          description: Помилка на сервері
+  /api/Order/send-order-xml:
+    post:
+      tags:
+        - Замовлення
+      summary: Створити документ і надіслати контрагенту через сервіс Вчасно.
+      description: 'Повертає  deal_id, document_id документа-замовлення.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendOrderRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SendOrderRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SendOrderRequest'
+      responses:
+        '200':
+          description: Документ відправлено
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UploadSuccessResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadSuccessResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UploadSuccessResponse'
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/UploadErrorResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/UploadErrorResponse'
+        '500':
+          description: Помилка на сервері
+  '/api/Order/sync-order-shipping/{id}':
+    get:
+      tags:
+        - Замовлення
+      summary: Синхронізація документа Повідомлення про відвантаження за ID
+      parameters:
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID документа
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  '/api/Order/sync-order-confirm/{id}':
+    get:
+      tags:
+        - Замовлення
+      summary: Синхронізація документа Підтвердження замовлення за ID
+      parameters:
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID документа
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/Price/sync-prices:
+    get:
+      tags:
+        - Прайси
+      summary: Отримання прайсів з сервісу Vchasno і збереження в Oracle
+      parameters:
+        - name: limit
+          in: query
+          description: Ліміт завантажених строк
+          schema:
+            type: integer
+            format: int32
+        - name: offset
+          in: query
+          description: '0'
+          schema:
+            type: integer
+            format: int32
+        - name: sender_edrpou
+          in: query
+          description: edrpou
+          schema:
+            type: string
+        - name: ulToken
+          in: query
+          description: Токен ЮЛ
+          schema:
+            type: string
+        - name: is_processed
+          in: query
+          description: is_processed
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+  '/api/Price/sync-price/{id}':
+    get:
+      tags:
+        - Прайси
+      summary: Синхронізація одного документа за ID
+      parameters:
+        - name: ulToken
+          in: query
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: ID документа
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/Price/sync/pending:
+    post:
+      tags:
+        - Прайси
+      summary: >-
+        Синхронізувати всі прайси за ID з таблиці vchasno_suppliers_documents,
+        де is_done = 0.
+      description: "Виконує паралельні запити до API Vchasno по кожному ID, збереженому в БД, де is_done = 0.\r\nВідправляє запит на API Vchasno, щоб помітити документ за його ID як оброблений."
+      parameters:
+        - name: ulToken
+          in: header
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Синхронізацію завершено
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  /api/Price/mark-document-processed:
+    post:
+      tags:
+        - Прайси
+      summary: Помітити документ як оброблений.
+      description: >-
+        Відправляє запит на API Vchasno, щоб помітити документ за його ID як
+        оброблений.
+      parameters:
+        - name: ulToken
+          in: header
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: ID документа
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Документ успішно помічений як оброблений
+components:
+  schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+      additionalProperties: {}
+    SendOrderRequest:
+      type: object
+      properties:
+        ulToken:
+          type: string
+          nullable: true
+        docNum:
+          type: string
+          nullable: true
+        xmlFileBody:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UploadErrorResponse:
+      type: object
+      properties:
+        reason:
+          type: string
+          nullable: true
+        details:
+          type: string
+          nullable: true
+        document_number:
+          type: string
+          nullable: true
+        buyer_gln:
+          type: string
+          nullable: true
+        seller_gln:
+          type: string
+          nullable: true
+        code:
+          type: integer
+          format: int32
+      additionalProperties: false
+    UploadSuccessResponse:
+      type: object
+      properties:
+        deal_id:
+          type: string
+          nullable: true
+        document_id:
+          type: string
+          nullable: true
+        vchasno_id:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: 'Введіть API ключ у заголовку Authorization. Приклад: ApiKey 123456'
+      name: Authorization
+      in: header

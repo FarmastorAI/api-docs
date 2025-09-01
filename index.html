@@ -33,27 +33,28 @@
 </head>
 <body>
     <div class="service-selector">
-        <h2>🏢 Company API Documentation</h2>
+        <div style="display: flex; align-items: center; gap: 12px;">
+        <img src="assets/img/logo.bmp" alt="Логотип компании" style="height: 32px;">
+        <h2 style="margin: 0;">Farmastor API Documentation</h2>
+       </div>
         <p>Виберіть сервіс для перегляду документації:</p>
         <div class="service-buttons">
-            <button class="service-btn active" onclick="loadSwagger('services/api_vchasno.yaml')">
+            <button class="service-btn active" onclick="loadSwagger('services/api_vchasno.yaml', this)">
                 👤 Сервіс з API Вчасно
             </button>
-            <button class="service-btn" onclick="loadSwagger('services/order-service.yaml')">
-                🛒 Order Service
+            <button class="service-btn" onclick="loadSwagger('services/api_suppliers.yaml', this)">
+                👤 Сервіс синхронізації документи з API постачальників
             </button>
-            <button class="service-btn" onclick="loadSwagger('services/payment-service.yaml')">
-                💳 Payment Service
-            </button>
-            <button class="service-btn" onclick="loadSwagger('services/notification-service.yaml')">
-                🔔 Notification Service
+            <button class="service-btn" onclick="loadSwagger('services/api_add_crm.yaml', this)">
+                👤 Сервіс по работі з TT --> OneBox 
             </button>
         </div>
     </div>
     
     <div id="swagger-ui"></div>
-
+    <!-- ВАЖНО: подключаем JS именно в таком порядке -->
     <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js"></script>
     <script src="swagger-config.js"></script>
 </body>
 </html>

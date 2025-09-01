@@ -2,24 +2,21 @@ let currentSwaggerUI = null;
 
 // Инициализация с первым сервисом
 document.addEventListener('DOMContentLoaded', function() {
-    loadSwagger('services/user-service.yaml');
+    const firstBtn = document.querySelector('.service-btn.active');
+    loadSwagger('services/api_vchasno.yaml', firstBtn);
 });
 
-function loadSwagger(specUrl) {
-    // Удаляем предыдущий экземпляр
-    if (currentSwaggerUI) {
-        const swaggerContainer = document.getElementById('swagger-ui');
-        swaggerContainer.innerHTML = '';
-    }
-    
-    // Создаем новый экземпляр Swagger UI
+function loadSwagger(specUrl, btn) {
+    const swaggerContainer = document.getElementById('swagger-ui');
+    swaggerContainer.innerHTML = '';
+
     currentSwaggerUI = SwaggerUIBundle({
         url: specUrl,
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
             SwaggerUIBundle.presets.apis,
-            SwaggerUIBundle.presets.standalone
+            SwaggerUIStandalonePreset  // ← ВАЖНО! НЕ SwaggerUIBundle.presets.standalone
         ],
         plugins: [
             SwaggerUIBundle.plugins.DownloadUrl
@@ -27,7 +24,6 @@ function loadSwagger(specUrl) {
         layout: "StandaloneLayout",
         tryItOutEnabled: true,
         requestInterceptor: (request) => {
-            // Добавляем базовые заголовки для всех запросов
             request.headers['Authorization'] = 'Bearer YOUR_TOKEN_HERE';
             return request;
         },
@@ -36,12 +32,9 @@ function loadSwagger(specUrl) {
             return response;
         }
     });
-    
-    // Обновляем активную кнопку
-    document.querySelectorAll('.service-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    event.target.classList.add('active');
+
+    document.querySelectorAll('.service-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
 }
 
 // Функция для добавления нового сервиса динамически
@@ -50,6 +43,6 @@ function addNewService(name, specUrl, icon = '🔧') {
     const newButton = document.createElement('button');
     newButton.className = 'service-btn';
     newButton.innerHTML = `${icon} ${name}`;
-    newButton.onclick = () => loadSwagger(specUrl);
+    newButton.onclick = function() { loadSwagger(specUrl, newButton); };
     buttonsContainer.appendChild(newButton);
 }

@@ -14,6 +14,10 @@ paths:
           in: query
           schema:
             type: string
+        - name: warehouseList
+          in: query
+          schema:
+            type: string
       responses:
         '200':
           description: OK
@@ -137,6 +141,19 @@ paths:
       tags:
         - DeltaMedical
       summary: Синхронизировать прайс‑лист Delta Medical.
+      parameters:
+        - name: date
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /api/suppliers/delta-medical/prices_for_sale/sync:
+    post:
+      tags:
+        - DeltaMedical
+      summary: Синхронизировать прайс‑лист по відтермінуванню Delta Medical.
       parameters:
         - name: date
           in: query
